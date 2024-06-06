@@ -18,4 +18,16 @@ export default class CampaignsController {
 
     return campaigns;
   }
+
+  async downloadFiles({ params, request, response }: HttpContext) {
+
+    const { uuid } = params;
+
+    const files = await Campaign.query()
+      .select(['xlsx_success', 'xlsx_error'])
+      .where('uuid', uuid)
+      .first();
+
+    return files;
+  }
 }

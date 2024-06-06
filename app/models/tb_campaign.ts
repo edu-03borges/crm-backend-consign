@@ -20,6 +20,12 @@ export default class TbCampaign extends BaseModel {
   @column()
   declare status: string
 
+  @column({ serializeAs: 'xlsx_success' })
+  declare xlsx_success: string
+
+  @column({ serializeAs: 'xlsx_error' })
+  declare xlsx_error: string
+
   @column({ serializeAs: 'file_data' })
   declare file_data: string
 

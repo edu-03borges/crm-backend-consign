@@ -14,3 +14,4 @@ router.get('/financial/fgts/show_instances', [InstanceController, 'show']);
 // CampaignsController
 router.post('/financial/fgts/create_campaign', [CampaignsController, 'create']);
 router.get('/financial/fgts/show_campaigns', [CampaignsController, 'show']);
+router.get('/financial/fgts/download_files/:uuid', [CampaignsController, 'downloadFiles']);
