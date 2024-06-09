@@ -20,14 +20,14 @@ export default class TbCampaign extends BaseModel {
   @column()
   declare status: string
 
-  @column({ serializeAs: 'xlsx_success' })
-  declare xlsx_success: string
-
-  @column({ serializeAs: 'xlsx_error' })
-  declare xlsx_error: string
+  @column({ serializeAs: 'query_data' })
+  declare query_data: string
 
   @column({ serializeAs: 'file_data' })
   declare file_data: string
+
+  @column({ serializeAs: 'records_consulted' })
+  declare records_consulted: number
 
   @column.dateTime({ autoCreate: true, serializeAs: 'created_at' })
   declare created_at: DateTime

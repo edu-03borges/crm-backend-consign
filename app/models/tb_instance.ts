@@ -13,9 +13,6 @@ export default class TbInstance extends BaseModel {
   declare instance: number
 
   @column()
-  declare document: string
-
-  @column()
   declare status: string
 
   @column()

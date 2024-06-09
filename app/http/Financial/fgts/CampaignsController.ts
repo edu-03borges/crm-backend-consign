@@ -19,15 +19,30 @@ export default class CampaignsController {
     return campaigns;
   }
 
-  async downloadFiles({ params, request, response }: HttpContext) {
+  async delete({ request, response, params }: HttpContext) {
 
     const { uuid } = params;
 
-    const files = await Campaign.query()
-      .select(['xlsx_success', 'xlsx_error'])
+    const campaign = await Campaign.findBy('uuid', uuid);
+
+    if (!campaign) {
+      return response.status(400).json({ message: 'Instância não encontrada' });
+    }
+
+    await campaign.delete();
+
+    return campaign;
+  }
+
+  async searchData({ params, request, response }: HttpContext) {
+
+    const { uuid } = params;
+
+    const data = await Campaign.query()
+      .select(['query_data', 'name'])
       .where('uuid', uuid)
       .first();
 
-    return files;
+    return data;
   }
 }

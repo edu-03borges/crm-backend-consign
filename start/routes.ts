@@ -10,8 +10,11 @@ const CampaignsController = () => import('../app/http/Financial/fgts/CampaignsCo
 // InstanceController
 router.post('/financial/fgts/create_instance', [InstanceController, 'create']);
 router.get('/financial/fgts/show_instances', [InstanceController, 'show']);
+router.get('/financial/fgts/show_status_instances', [InstanceController, 'showStatus']);
+router.delete('/financial/fgts/delete_instance/:uuid', [InstanceController, 'delete']);
 
 // CampaignsController
 router.post('/financial/fgts/create_campaign', [CampaignsController, 'create']);
 router.get('/financial/fgts/show_campaigns', [CampaignsController, 'show']);
-router.get('/financial/fgts/download_files/:uuid', [CampaignsController, 'downloadFiles']);
+router.get('/financial/fgts/search_data/:uuid', [CampaignsController, 'searchData']);
+router.delete('/financial/fgts/delete_campaign/:uuid', [CampaignsController, 'delete']);
