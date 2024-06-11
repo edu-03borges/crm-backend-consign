@@ -1,14 +1,17 @@
-version: '3'
+version: '3.8'
 
 services:
-  backend:
+  adonis_app:
+    container_name: adonis_app
+    restart: always
     build:
       context: .
-      dockerfile: Dockerfile
+      target: dependencies
     ports:
-      - "3333:3333"
-    environment:
-      NODE_ENV: production
+      - ${PORT}:${PORT}
+      - 9229:9229
+    env_file:
+      - .env
     volumes:
-      - .:/usr/app
-    command: npm start
+      - ./:/home/node/app
+    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
