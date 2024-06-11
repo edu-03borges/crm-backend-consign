@@ -20,14 +20,14 @@ export default class InstanceController {
       }
   }
 
-  async show({ request, response }: HttpContext) {
+  async show({ }: HttpContext) {
 
     const instances = await Instance.query();
 
     return instances;
   }
 
-  async delete({ request, response, params }: HttpContext) {
+  async delete({ response, params }: HttpContext) {
 
     const { uuid } = params;
 
@@ -42,7 +42,7 @@ export default class InstanceController {
     return instance;
   }
 
-  async showStatus({ request, response }: HttpContext) {
+  async showStatus({ }: HttpContext) {
 
     const instances = await Instance.query()
       .where('status', "LIVRE");

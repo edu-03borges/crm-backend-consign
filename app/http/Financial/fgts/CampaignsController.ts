@@ -3,7 +3,7 @@ import Campaign from "#models/tb_campaign";
 import type { HttpContext } from '@adonisjs/core/http';
 
 export default class CampaignsController {
-  async create({ request, response }: HttpContext) {
+  async create({ request }: HttpContext) {
 
     const data = request.body();
 
@@ -12,14 +12,14 @@ export default class CampaignsController {
     return campaign;
   }
 
-  async show({ request, response }: HttpContext) {
+  async show({ }: HttpContext) {
 
     const campaigns = await Campaign.query();
 
     return campaigns;
   }
 
-  async delete({ request, response, params }: HttpContext) {
+  async delete({ response, params }: HttpContext) {
 
     const { uuid } = params;
 
@@ -34,7 +34,7 @@ export default class CampaignsController {
     return campaign;
   }
 
-  async searchData({ params, request, response }: HttpContext) {
+  async searchData({ params }: HttpContext) {
 
     const { uuid } = params;
 
