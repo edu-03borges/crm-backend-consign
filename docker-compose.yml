@@ -9,7 +9,6 @@ services:
       target: dependencies
     ports:
       - ${PORT}:${PORT}
-      - 9229:9229
     env_file:
       - .env
     volumes:
