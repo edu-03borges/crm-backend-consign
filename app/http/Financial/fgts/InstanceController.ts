@@ -49,4 +49,23 @@ export default class InstanceController {
 
     return instances;
   }
+
+  async updateStatus({ request, response, params }: HttpContext) {
+
+    const { status } = request.body();
+
+    const { uuid } = params;
+
+    const instance = await Instance.findBy('uuid', uuid);
+
+    if (!instance) {
+      return response.status(400).json({ message: 'Instância não encontrada' });
+    }
+
+    instance.status = status;
+
+    await instance.save();
+
+    return instance;
+  }
 }

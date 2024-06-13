@@ -12,6 +12,7 @@ router.post('/financial/fgts/create_instance', [InstanceController, 'create']);
 router.get('/financial/fgts/show_instances', [InstanceController, 'show']);
 router.get('/financial/fgts/show_status_instances', [InstanceController, 'showStatus']);
 router.delete('/financial/fgts/delete_instance/:uuid', [InstanceController, 'delete']);
+router.post('/financial/fgts/update_status_instance/:uuid', [InstanceController, 'updateStatus']);
 
 // CampaignsController
 router.post('/financial/fgts/create_campaign', [CampaignsController, 'create']);
