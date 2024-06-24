@@ -26,12 +26,6 @@ export default class TbCampaign extends BaseModel {
   @column({ serializeAs: 'file_data' })
   declare file_data: string
 
-  @column()
-  declare instances: string
-
-  @column()
-  declare count: number
-
   @column({ serializeAs: 'records_consulted' })
   declare records_consulted: number
 
