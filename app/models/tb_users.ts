@@ -6,22 +6,25 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-  uids: ['email'],
+  uids: ['user'],
   passwordColumnName: 'password',
-})
+});
 
 export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare fullName: string | null
+  declare uuid: string
 
   @column()
-  declare email: string
+  declare user: string
 
-  @column({ serializeAs: null })
+  @column()
   declare password: string
+
+  @column()
+  declare idcompany: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -30,4 +33,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare updatedAt: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
+
+  static get table() {
+    return 'tb_users'
+  }
 }

@@ -1,7 +1,16 @@
 
 import router from '@adonisjs/core/services/router';
+import { middleware } from './kernel.js';
+
 const InstanceController = () => import('../app/http/Financial/fgts/InstanceController.js');
 const CampaignsController = () => import('../app/http/Financial/fgts/CampaignsController.js');
+const AuthController = () => import('../app/http/Login/AuthController.js');
+
+// ## Login
+router.post('/register_user', [AuthController, 'register']).as('auth.register');
+router.post('/authenticate_user', [AuthController, 'authenticate']).as('auth.authenticate');
+router.delete('/logout_user', [AuthController, 'logout']).as('auth.logout').use(middleware.auth());
+router.post('/me_user', [AuthController, 'me']).as('auth.me')
 
 // ## Financial
 
