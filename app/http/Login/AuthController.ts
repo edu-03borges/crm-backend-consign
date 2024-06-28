@@ -32,7 +32,7 @@ export default class AuthController {
   }
 
   async logout({ auth }: HttpContext) {
-    const user = auth.user!;
+    const user = auth.use('api').user!;
 
     await User.accessTokens.delete(user, user.currentAccessToken.identifier);
 
@@ -40,7 +40,7 @@ export default class AuthController {
   }
 
   async me({ auth }: HttpContext) {
-    await auth.check();
+    await auth.use('api').check();
 
     return {
       user: auth.user,
