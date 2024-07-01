@@ -6,6 +6,14 @@ const InstanceController = () => import('../app/http/Financial/fgts/InstanceCont
 const CampaignsController = () => import('../app/http/Financial/fgts/CampaignsController.js');
 const AuthController = () => import('../app/http/Login/AuthController.js');
 
+router.get("/", () => {
+  return {
+    info: "crm-backend-consign",
+    versao: "v1.0.0",
+    lastUpdate: "2024-07-01",
+  };
+});
+
 // ## Login
 router.post('/register_user', [AuthController, 'register']).as('auth.register');
 router.post('/authenticate_user', [AuthController, 'authenticate']).as('auth.authenticate');

@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  adonis_app:
-    container_name: adonis_app
+  crm-backend-consign:
+    container_name: crm-backend-consign
     restart: always
     build:
       context: .
@@ -12,5 +12,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./:/home/node/app
-    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+      - .:/usr/app
+      - /usr/app/node_modules
+    command: dumb-init node ace serve --watch
