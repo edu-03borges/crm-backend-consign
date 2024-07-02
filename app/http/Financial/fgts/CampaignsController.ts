@@ -1,4 +1,4 @@
-import Campaign from "#models/tb_campaign";
+import Campaign from "#models/tb_campaigns";
 
 import type { HttpContext } from '@adonisjs/core/http';
 

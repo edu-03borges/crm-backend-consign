@@ -1,4 +1,4 @@
-import Instance from "#models/tb_instance";
+import Instance from "#models/tb_instances";
 
 import type { HttpContext } from '@adonisjs/core/http';
 

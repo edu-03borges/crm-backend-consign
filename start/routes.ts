@@ -5,6 +5,7 @@ import { middleware } from './kernel.js';
 const InstanceController = () => import('../app/http/Financial/fgts/InstanceController.js');
 const CampaignsController = () => import('../app/http/Financial/fgts/CampaignsController.js');
 const AuthController = () => import('../app/http/Login/AuthController.js');
+const CompanyController = () => import('../app/http/Utils/CompanyController.js');
 
 router.get("/", () => {
   return {
@@ -19,6 +20,10 @@ router.post('/register_user', [AuthController, 'register']).as('auth.register');
 router.post('/authenticate_user', [AuthController, 'authenticate']).as('auth.authenticate');
 router.delete('/logout_user', [AuthController, 'logout']).as('auth.logout').use(middleware.auth());
 router.post('/me_user', [AuthController, 'me']).as('auth.me')
+
+// ## utils
+router.post('/utils/create_company', [CompanyController, 'create']);
+router.get('/utils/get_public_url/:code', [CompanyController, 'getPublicUrl']);
 
 // ## Financial
 
