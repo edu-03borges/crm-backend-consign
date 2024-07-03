@@ -3,18 +3,22 @@ import Campaign from "#models/tb_campaigns";
 import type { HttpContext } from '@adonisjs/core/http';
 
 export default class CampaignsController {
-  async create({ request }: HttpContext) {
+  async create({ request, auth }: HttpContext) {
+    const user = auth.use('api').user!;
 
     const data = request.body();
 
-    const campaign = await Campaign.create(data);
+    const campaign = await Campaign.create({ ...data, iduser: user.id });
 
     return campaign;
   }
 
-  async show({ }: HttpContext) {
+  async show({ auth }: HttpContext) {
+    const user = auth.use('api').user!;
 
-    const campaigns = await Campaign.query();
+    const campaigns = await Campaign
+      .query()
+      .where('iduser', user.id);
 
     return campaigns;
   }
@@ -34,13 +38,16 @@ export default class CampaignsController {
     return campaign;
   }
 
-  async searchData({ params }: HttpContext) {
+  async searchData({ params, auth }: HttpContext) {
+
+    const user = auth.use('api').user!;
 
     const { uuid } = params;
 
     const data = await Campaign.query()
       .select(['query_data', 'name'])
       .where('uuid', uuid)
+      .where('iduser', user.id)
       .first();
 
     return data;

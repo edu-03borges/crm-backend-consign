@@ -3,16 +3,18 @@ import Instance from "#models/tb_instances";
 import type { HttpContext } from '@adonisjs/core/http';
 
 export default class InstanceController {
-  async create({ request, response }: HttpContext) {
+  async create({ request, response, auth }: HttpContext) {
+    const user = auth.use('api').user!;
 
     const data = request.body();
 
     const instanceSelect = await Instance.query()
       .where('instance', data.instance)
+      .where('iduser', user.id)
       .first();
 
       if (!instanceSelect) {
-        const instance = await Instance.create(data);
+        const instance = await Instance.create({ ...data, iduser: user.id });
 
         return instance;
       } else {
@@ -20,9 +22,12 @@ export default class InstanceController {
       }
   }
 
-  async show({ }: HttpContext) {
+  async show({ auth }: HttpContext) {
+    const user = auth.use('api').user!;
 
-    const instances = await Instance.query();
+    const instances = await Instance
+      .query()
+      .where('iduser', user.id);
 
     return instances;
   }
@@ -42,10 +47,12 @@ export default class InstanceController {
     return instance;
   }
 
-  async showStatus({ }: HttpContext) {
+  async showStatus({ auth }: HttpContext) {
+    const user = auth.use('api').user!;
 
     const instances = await Instance.query()
-      .where('status', "LIVRE");
+      .where('status', "LIVRE")
+      .where('iduser', user.id);
 
     return instances;
   }

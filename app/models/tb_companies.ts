@@ -9,7 +9,7 @@ export default class TbCompany extends BaseModel {
   declare uuid: string
 
   @column()
-  declare code: number
+  declare iduser: number
 
   @column()
   declare name: string

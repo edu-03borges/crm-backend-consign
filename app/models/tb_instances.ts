@@ -17,9 +17,12 @@ export default class TbInstance extends BaseModel {
 
   @column()
   declare user: string
-  
+
   @column()
   declare password: string
+
+  @column()
+  declare iduser: number
 
   @column({ serializeAs: 'time_logged_in'})
   declare time_logged_in: number
