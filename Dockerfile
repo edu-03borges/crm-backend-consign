@@ -15,6 +15,7 @@ USER node
 
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN npm install
 COPY --chown=node:node . .
 
@@ -27,6 +28,7 @@ ENV PORT=$PORT
 ENV HOST=0.0.0.0
 
 COPY --chown=node:node ./package*.json ./
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN npm install --production
 COPY --chown=node:node --from=build /usr/app/build .
 EXPOSE $PORT
