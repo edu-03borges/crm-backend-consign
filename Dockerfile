@@ -15,7 +15,7 @@ USER node
 
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
-RUN yarn install --frozen-lockfile
+RUN npm install
 COPY --chown=node:node . .
 
 FROM dependencies AS build
@@ -27,7 +27,7 @@ ENV PORT=$PORT
 ENV HOST=0.0.0.0
 
 COPY --chown=node:node ./package*.json ./
-RUN yarn install --frozen-lockfile --production
+RUN npm install --production
 COPY --chown=node:node --from=build /usr/app/build .
 EXPOSE $PORT
 CMD [ "dumb-init", "node", "server.js" ]
