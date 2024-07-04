@@ -15,3 +15,9 @@ services:
       - .:/usr/app
       - /usr/app/node_modules
     command: dumb-init node ace serve --watch
+    networks:
+      - aws
+
+networks:
+  aws:
+    external: true
