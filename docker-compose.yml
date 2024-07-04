@@ -20,4 +20,4 @@ services:
 
 networks:
   aws:
-    driver: bridge
+    external: true
